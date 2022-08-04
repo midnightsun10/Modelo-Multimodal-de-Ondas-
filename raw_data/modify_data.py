@@ -46,6 +46,8 @@ def main():
     list_dates = dates_download(init_date_update, end_date_update)
     
     for file_nc, list_date in zip(list_ncs, list_dates):
+        if file_nc[-3:] in ["bz2"]:
+            continue        
         NC   = xr.open_dataset(file_nc)
         TAUX = getattr(NC,"surface_downward_eastward_stress")
         TAUY = getattr(NC,"surface_downward_northward_stress")
