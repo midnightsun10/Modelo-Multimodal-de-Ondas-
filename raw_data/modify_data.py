@@ -42,7 +42,7 @@ def main():
     init_date_update = str(os.environ["INIT_DATE"])
     end_date_update  = str(os.environ["END_DATE"])
 
-    list_ncs   = [glob.glob(OUTPUT_DIR+"TAU/"+date_.split("-")[0]+"/"+"".join(date_.split("-"))+"*")[0] for date_ in dates_download(init_date_update, end_date_update)]
+    list_ncs   = [glob.glob(OUTPUT_DIR+"TAU/"+date_.split("-")[0]+"/"+"".join(date_.split("-"))+"*_daily-ifremer-L3-MWF-GLO.*")[0] for date_ in dates_download(init_date_update, end_date_update)]
     list_dates = dates_download(init_date_update, end_date_update)
     
     for file_nc, list_date in zip(list_ncs, list_dates):
