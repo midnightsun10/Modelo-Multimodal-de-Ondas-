@@ -39,14 +39,16 @@ def create_xarray(data_, dim1, dim2, dim3, dim1_name, dim2_name, dim3_name):
 
 def main():
     OUTPUT_DIR       = str(os.environ["OUTPUT"])
-    init_date_update = str(os.environ["INIT_DATE"])
-    end_date_update  = str(os.environ["END_DATE"])
+    date_update      = str(os.environ["DATE"])
+    # end_date_update  = str(os.environ["END_DATE"])
 
-    list_ncs   = [glob.glob(OUTPUT_DIR+"TAU/"+date_.split("-")[0]+"/"+"".join(date_.split("-"))+"*_daily-ifremer-L3-MWF-GLO.*")[0] for date_ in dates_download(init_date_update, end_date_update)]
-    list_dates = dates_download(init_date_update, end_date_update)
+    list_ncs   = [glob.glob(OUTPUT_DIR+"TAU/"+date_.split("-")[0]+"/"+"".join(date_.split("-"))+"*_daily-ifremer-L3-MWF-GLO.*")[0] for date_ in dates_download(date_update, date_update)]
+    list_dates = dates_download(date_update, date_update)
     
     for file_nc, list_date in zip(list_ncs, list_dates):
         if file_nc[-3:] in ["bz2"]:
+            # print("Corrupted data")
+            # os.environ["corrupted"] = "true"
             continue        
         NC   = xr.open_dataset(file_nc)
         TAUX = getattr(NC,"surface_downward_eastward_stress")
@@ -61,7 +63,7 @@ def main():
                                 date, TAUX.latitude.values, np.where( lon_old < 0, lon_old + 360, lon_old), 
                                 "time", "lat", "lon").sel(lat=slice(-30.5, 30.5), lon=slice(89.5, 300.5))
         DATASET = xr.Dataset({"taux": TAUX_32, "tauy": TAUY_32})
-        DATASET.to_netcdf(file_nc.split("00_")[0]+".nc")    
+        DATASET.to_netcdf(file_nc.split("00_")[0]+".nc")
         
 if __name__ == "__main__":
     main()    

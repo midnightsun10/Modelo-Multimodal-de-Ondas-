@@ -35,9 +35,9 @@ def build_sentences(list_dates_, output_):
             
 def main():
     OUTPUT_DIR       = str(os.environ["OUTPUT"])
-    init_date_update = str(os.environ["INIT_DATE"])
-    end_date_update  = str(os.environ["END_DATE"])
-    build_sentences(dates_download(init_date_update, end_date_update) ,OUTPUT_DIR)
+    date_update      = str(os.environ["DATE"])
+    # end_date_update  = str(os.environ["END_DATE"])
+    build_sentences(dates_download(date_update, date_update) ,OUTPUT_DIR)
 
 if __name__ == "__main__":
     main()

@@ -2,9 +2,9 @@
 
 path=`pwd`
 # date_current=$(date +'%Y-%m-%d')
-export OUTPUT="/home/brayan/DATA/Modelo-Multimodal-de-Ondas/raw_data/"
-export INIT_DATE="2022-08-03"  #$(date --date="yesterday" +%Y-%m-%d) 
-export END_DATE="2022-08-03"   #$(date --date="yesterday" +%Y-%m-%d) 
+# export OUTPUT="/home/brayan/DATA/Modelo-Multimodal-de-Ondas/raw_data/$MODEL/"
+# export DATE="2022-08-03"  #$(date --date="yesterday" +%Y-%m-%d) 
+# export END_DATE="2022-08-03"   #$(date --date="yesterday" +%Y-%m-%d) 
 
 chmod u+rwx ./raw_data/generate_urls.py
 ./raw_data/generate_urls.py
@@ -20,9 +20,7 @@ cd "$path"
 chmod u+rwx ./raw_data/modify_data.py
 ./raw_data/modify_data.py
 
-cd "$OUTPUT"
-rm */*/*_daily-ifremer-L3-MWF-GLO.nc
-
+[ -e $OUTPUT*/*/*_daily-ifremer-L3-MWF-GLO.nc ] && rm $OUTPUT*/*/*_daily-ifremer-L3-MWF-GLO.nc
 
 
 
