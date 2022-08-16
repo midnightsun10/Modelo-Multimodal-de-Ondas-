@@ -8,19 +8,27 @@ path=`pwd`
 
 chmod u+rwx ./raw_data/generate_urls.py
 ./raw_data/generate_urls.py
-
-cd "$OUTPUT"
-sh *txt
-
 wait
 
-echo "continua"
+sh "$PATH_RAW_DATA"download.txt
+wait
 
 cd "$path"
 chmod u+rwx ./raw_data/modify_data.py
 ./raw_data/modify_data.py
+wait
 
-[ -e $OUTPUT*/*/*_daily-ifremer-L3-MWF-GLO.nc ] && rm $OUTPUT*/*/*_daily-ifremer-L3-MWF-GLO.nc
+if [ $MODEL = "ASCAT" ]
+then
+    rm $PATH_RAW_DATA*/*/*_daily-ifremer-L3-MWF-GLO.nc || true
+    # [ -e $OUTPUT*/*/*_daily-ifremer-L3-MWF-GLO.nc ] && rm $OUTPUT*/*/*_daily-ifremer-L3-MWF-GLO.nc
+
+elif [ $MODEL = "NCEP" ]
+then
+    rm $PATH_RAW_DATA*/*/*daily-ncep.nc || true
+fi
+
+
 
 
 
