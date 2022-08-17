@@ -8,13 +8,13 @@ path=`pwd`
 
 # cd ./process_data
 
-chmod u+rwx ./process_data/fill_missing.py
-pass=$(./process_data/fill_missing.py)
+chmod u+rwx "$PATH_MAIN"process_data/fill_missing.py
+pass=$("$PATH_MAIN"process_data/fill_missing.py)
 wait 
 
 if [ "$pass"="true" ]
 then
-    chmod u+rwx ./process_data/anomalies.py
-    ./process_data/anomalies.py
+    chmod u+rwx "$PATH_MAIN"process_data/anomalies.py
+    "$PATH_MAIN"process_data/anomalies.py
     echo "Aqui termina"
 fi

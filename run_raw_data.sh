@@ -6,16 +6,15 @@ path=`pwd`
 # export DATE="2022-08-03"  #$(date --date="yesterday" +%Y-%m-%d) 
 # export END_DATE="2022-08-03"   #$(date --date="yesterday" +%Y-%m-%d) 
 
-chmod u+rwx ./raw_data/generate_urls.py
-./raw_data/generate_urls.py
+chmod u+rwx "$PATH_MAIN"raw_data/generate_urls.py
+"$PATH_MAIN"raw_data/generate_urls.py
 wait
 
 sh "$PATH_RAW_DATA"download.txt
 wait
 
-cd "$path"
-chmod u+rwx ./raw_data/modify_data.py
-./raw_data/modify_data.py
+chmod u+rwx "$PATH_MAIN"/raw_data/modify_data.py
+"$PATH_MAIN"/raw_data/modify_data.py
 wait
 
 if [ $MODEL = "ASCAT" ]

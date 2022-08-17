@@ -27,7 +27,7 @@ def build_sentences_ascat(list_dates_, output_):
     """
     Fincion que permite crear las sentencias de descarga y descompresion en un archivo txt a partir del url fuente
     """
-    base_ = "wget -cO - ftp://ftp.ifremer.fr/ifremer/cersat/products/gridded/MWF/L3/ASCAT/Daily/Netcdf/{year}/{month}/{day}/{year}{month}{day}00* > {output}/TAU/{year}/{year}{month}{day}00_daily-ifremer-L3-MWF-GLO.nc.bz2 && bzip2 -d ./TAU/{year}/{year}{month}{day}00*.bz2"
+    base_ = "wget -cO - ftp://ftp.ifremer.fr/ifremer/cersat/products/gridded/MWF/L3/ASCAT/Daily/Netcdf/{year}/{month}/{day}/{year}{month}{day}00* > {output}TAU/{year}/{year}{month}{day}00_daily-ifremer-L3-MWF-GLO.nc.bz2 && bzip2 -d {output}TAU/{year}/{year}{month}{day}00*.bz2"
     with open(output_ + "download.txt", "w") as f:        
         for date_ in list_dates_:
             check_dir(output_ + "TAU/" + date_.split("-")[0]+"/")
@@ -37,8 +37,8 @@ def build_sentences_ncep(date_, output_):
     """
     Fincion que permite crear las sentencias de descarga y descompresion en un archivo txt a partir del url fuente para ncep
     """
-    base_u = "wget -cO - https://downloads.psl.noaa.gov//Datasets/ncep.reanalysis/Dailies/surface_gauss/uwnd.10m.gauss.{year}.nc > {output}/WIND/{year}/{year}_uwnd_daily-ncep.nc" 
-    base_v = "wget -cO - https://downloads.psl.noaa.gov//Datasets/ncep.reanalysis/Dailies/surface_gauss/vwnd.10m.gauss.{year}.nc > {output}/WIND/{year}/{year}_vwnd_daily-ncep.nc" 
+    base_u = "wget -cO - https://downloads.psl.noaa.gov//Datasets/ncep.reanalysis/Dailies/surface_gauss/uwnd.10m.gauss.{year}.nc > {output}WIND/{year}/{year}_uwnd_daily-ncep.nc" 
+    base_v = "wget -cO - https://downloads.psl.noaa.gov//Datasets/ncep.reanalysis/Dailies/surface_gauss/vwnd.10m.gauss.{year}.nc > {output}WIND/{year}/{year}_vwnd_daily-ncep.nc" 
     check_dir(output_ + "WIND/" + date_.split("-")[0]+"/")
     with open(output_ + "download.txt", "w") as f:
         f.write(base_u.format(year=date_.split("-")[0], output = output_)+ "\n")
